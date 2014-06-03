@@ -1,4 +1,4 @@
-include <linux/init.h>
+#include <linux/init.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
 
@@ -6,8 +6,8 @@ MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Patrick Lindborg <lindborg@gmail.com>");
 MODULE_DESCRIPTION("Kernel leetspeak");
 static unsigned long buffer_size = 8192;
-module_param(buffer_size, ulong, (S_IRUSE | S_IRGRP | S_IROTH));
-
+module_param(buffer_size, ulong, (S_IRUSR | S_IRGRP | S_IROTH));
+MODULE_PARM_DESC(buffer_size, "Internal buffer size");
 
 static int __init leet_init(void)
 {
@@ -21,7 +21,7 @@ static int __init leet_init(void)
 
 static void __exit leet_exit(void)
 {
-	printk(KERN_INFO "leet device has been unregistered\n")
+	printk(KERN_INFO "leet device has been unregistered\n");
 }
 
 module_init(leet_init);
